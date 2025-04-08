@@ -1,5 +1,5 @@
 # MVC-Botiga
-![alt text](image.png)
-![alt text](image-1.png)
-![alt text](image-2.png)
-![alt text](image-3.png)
+![alt text](./media/image.png)
+![alt text](./media/image-1.png)
+![alt text](./media/image-2.png)
+![alt text](./media/image-3.png)
