@@ -1,6 +1,6 @@
 -- Evitar conflictes
 
-DROP TABLES IF EXISTS products;
+DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS Subcategoria;
 DROP TABLE IF EXISTS Categoria;
 
