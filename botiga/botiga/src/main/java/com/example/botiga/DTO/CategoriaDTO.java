@@ -1,7 +1,8 @@
 package com.example.botiga.DTO;
 
+import com.example.botiga.Model.Subcategoria;
 public class CategoriaDTO {
     private String desc_Categoria;
     private String status_Categoria;
-    Subcategoria subcategoria;
+    private Subcategoria subcategoria;
 }
