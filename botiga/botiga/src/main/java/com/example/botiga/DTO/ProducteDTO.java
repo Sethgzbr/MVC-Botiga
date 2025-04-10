@@ -1,12 +1,7 @@
 package com.example.botiga.DTO;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import com.example.botiga.Model.Categoria;
+import com.example.botiga.Model.Subcategoria;
 
 public class ProducteDTO {
 
