@@ -1,8 +1,5 @@
 package com.example.botiga.DTO;
 
-import com.example.botiga.Model.Categoria;
-import com.example.botiga.Model.Subcategoria;
-
 public class ProducteDTO {
 
     private String name_Procuduct;
