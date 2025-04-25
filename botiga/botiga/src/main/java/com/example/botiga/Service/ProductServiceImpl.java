@@ -37,10 +37,11 @@ public class ProductServiceImpl implements BotigaService {
 
     @Override
     public void save(Object entity) {
-        if (!(entity instanceof Product)) {
-            throw new IllegalArgumentException("Entity must be a Product");
+        if (!(entity instanceof ProductDTO)) {
+            throw new IllegalArgumentException("Entity must be a ProductDTO");
         }
-        productRepository.save((Product) entity);
+        Product product = productMapper.ProducteDTOToProduct((ProductDTO) entity);
+        productRepository.save(product);
     }
 
     @Override

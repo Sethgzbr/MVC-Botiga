@@ -37,10 +37,11 @@ public class SubCategoriaServiceImpl implements BotigaService {
 
     @Override
     public void save(Object entity) {
-        if (!(entity instanceof Subcategoria)) {
-            throw new IllegalArgumentException("Entity must be a Subcategoria");
+        if (!(entity instanceof SubcategoriaDTO)) {
+            throw new IllegalArgumentException("Entity must be a SubcategoriaDTO");
         }
-        subcategoriaRepository.save((Subcategoria) entity);
+        Subcategoria subcategoria = subcategoriaMapper.SubcategoriaDTOToSubcategoria((SubcategoriaDTO) entity);
+        subcategoriaRepository.save(subcategoria);
     }
 
     @Override

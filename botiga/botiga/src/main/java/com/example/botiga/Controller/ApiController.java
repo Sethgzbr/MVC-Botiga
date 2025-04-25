@@ -56,7 +56,7 @@ public class ApiController {
     public ResponseEntity<String> modificarPreu(@RequestParam Long id, @RequestParam double nouPreu) {
         ProductDTO product = (ProductDTO) productService.findById(id).orElse(null);
         if (product != null) {
-            product.setPriceProduct(nouPreu);
+            product.setPriceProduct((float) nouPreu);
             productService.save(product);
             return ResponseEntity.ok("Preu modificat correctament.");
         }
