@@ -13,6 +13,13 @@ public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
     @Override
     @NonNull
     List findAll();
+
     Categoria findByName(String name);
-    Set<Categoria> findByNameAndPrice(String name, float price);   
+
+    Set<Categoria> findByNameAndPrice(String name, float price);
+
+    static List<Categoria> findByCategoria_Id_Categoria(Long categoriaId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findByCategoria_Id_Categoria'");
+    }
 }

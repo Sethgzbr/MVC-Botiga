@@ -13,6 +13,10 @@ public interface SubcategoriaRepository extends JpaRepository<Subcategoria, Long
     @Override
     @NonNull
     List findAll();
+
     Subcategoria findByName(String name);
-    Set<Subcategoria> findByNameAndPrice(String name, float price);   
+
+    Set<Subcategoria> findByNameAndPrice(String name, float price);
+
+    List<Subcategoria> findByCategoria_Id_Categoria(Long categoriaId);
 }
