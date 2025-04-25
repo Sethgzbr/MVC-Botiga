@@ -6,15 +6,13 @@ import org.springframework.lang.NonNull;
 
 import java.util.List;
 import java.util.Set;
-import com.example.botiga.Model.Product;
+import com.example.botiga.Model.Categoria;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {
-
+public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
     @Override
     @NonNull
     List findAll();
-    Product findByName(String name);
-    Set<Product> findByNameAndPrice(String name, float price);
+    Categoria findByName(String name);
+    Set<Categoria> findByNameAndPrice(String name, float price);   
 }
-
