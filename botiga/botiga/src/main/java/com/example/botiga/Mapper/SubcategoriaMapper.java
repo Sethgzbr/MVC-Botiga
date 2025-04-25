@@ -10,13 +10,13 @@ import com.example.botiga.Model.Subcategoria;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface SubcategoriaMapper {
 
-    @Mapping(target = "desc_Subcategoria", source = "subcategoria.desc_Subcategoria")
-    @Mapping(target = "status_Subcategoria", source = "subcategoria.status_Subcategoria")
-    @Mapping(target = "categoria", source = "subcategoria.categoria")
+    @Mapping(target = "SubcategoriaDTO.desc_Subcategoria", source = "Subcategoria.desc_Subcategoria")
+    @Mapping(target = "SubcategoriaDTO.status_Subcategoria", source = "Subcategoria.status_Subcategoria")
+    @Mapping(target = "SubcategoriaDTO.categoria", source = "Subcategoria.categoria")
     SubcategoriaDTO SubcategoriaToSubcategoriaDTO(Subcategoria subcategoria);
 
-    @Mapping(target = "desc_Subcategoria", source = "subcategoriaDTO.desc_Subcategoria")
-    @Mapping(target = "status_Subcategoria", source = "subcategoriaDTO.status_Subcategoria")
-    @Mapping(target = "categoria", source = "subcategoriaDTO.categoria")
+    @Mapping(target = "Subcategoria.desc_Subcategoria", source = "desc_Subcategoria")
+    @Mapping(target = "Subcategoria.status_Subcategoria", source = "status_Subcategoria")
+    @Mapping(target = "Subcategoria.categoria", source = "categoria")
     Subcategoria SubcategoriaDTOToSubcategoria(SubcategoriaDTO subcategoriaDTO);
 }
