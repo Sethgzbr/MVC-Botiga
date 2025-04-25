@@ -88,4 +88,36 @@ public class ApiController {
     public ResponseEntity<List<SubcategoriaDTO>> llistarSubcategories() {
         return ResponseEntity.ok(subCategoriaService.findAll());
     }
+
+    //Cerca una descripcio per id de producte
+    @GetMapping("/CercaDescripcioProducte")
+    public ResponseEntity<String> cercaDescripcioProducte(@RequestParam Long id) {
+        String descripcio = productService.findDescripcionById(id);
+        if (descripcio != null) {
+            return ResponseEntity.ok(descripcio);
+        }
+        return ResponseEntity.badRequest().body("Producte no trobat.");
+    }
+
+    //Cerca una descripcio per id de categoria
+    @GetMapping("/CercaDescripcioCategoria")
+    public ResponseEntity<String> cercaDescripcioCategoria(@RequestParam Long id) {
+        String descripcio = categoriaService.findDescripcionById(id);
+        if (descripcio != null) {
+            return ResponseEntity.ok(descripcio);
+        }
+        return ResponseEntity.badRequest().body("Categoria no trobada.");
+    }
+
+    //Cerca una descripcio per id de subcategoria
+    @GetMapping("/CercaDescripcioSubcategoria")
+    public ResponseEntity<String> cercaDescripcioSubcategoria(@RequestParam Long id) {
+        String descripcio = subCategoriaService.findDescripcionById(id);
+        if (descripcio != null) {
+            return ResponseEntity.ok(descripcio);
+        }
+        return ResponseEntity.badRequest().body("Subcategoria no trobada.");
+    }
+
 }
+
