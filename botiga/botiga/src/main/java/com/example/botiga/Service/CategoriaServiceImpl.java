@@ -12,7 +12,7 @@ import com.example.botiga.Model.Categoria;
 import com.example.botiga.Repository.CategoriaRepository;
 
 @Service
-public class CategoriaServiceImpl {
+public class CategoriaServiceImpl implements BotigaService {
 
     private final CategoriaRepository categoriaRepository;
     private final CategoriaMapper categoriaMapper;
@@ -48,4 +48,14 @@ public class CategoriaServiceImpl {
     Optional<Categoria> findByCategoriaId(Long id);
 
     
+    @Override
+    public String findDescripcionById(Long id) {
+        Categoria categoria = categoriaRepository.findById(id).orElse(null);
+        if (categoria != null) {
+            return categoria.getdescCategoria();
+        }
+        return null;
+    }
+
+
 }

@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.example.botiga.Model.Product;
 import com.example.botiga.Repository.ProductRepository;
 
@@ -39,5 +40,14 @@ public class ProductServiceImpl implements BotigaService {
 
     public Object findByName(String name) {
         return productRepository.findByName(name);
+    }
+
+    @Override
+    public String findDescripcionById(Long id) {
+        Product product = productRepository.findById(id).orElse(null);
+        if (product != null) {
+            return product.getDescription();
+        }
+        return null;
     }
 }
