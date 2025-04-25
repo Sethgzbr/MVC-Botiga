@@ -17,11 +17,11 @@ public class Categoria {
     @Column
     private long id_Categoria;
     @Column
-    private String desc_Categoria;
+    private String descCategoria;
     @Column
-    private String status_Categoria;
-    @ManyToOne(cascade=CascadeType.PERSIST)
-    @JoinColumn(name="id_subcategoria")
+    private String statusCategoria;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_subcategoria")
     private Subcategoria subcategory;
     @Column
     private LocalDateTime creation_at;
