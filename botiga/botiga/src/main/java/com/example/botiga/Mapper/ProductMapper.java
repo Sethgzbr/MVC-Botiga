@@ -1,14 +1,16 @@
 package com.example.botiga.Mapper;
 
+import java.util.Set;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
-import com.example.botiga.DTO.ProducteDTO;
+import com.example.botiga.DTO.ProductDTO;
 import com.example.botiga.Model.Product;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface ProducteMapper {
+public interface ProductMapper {
 
     @Mapping(target = "nameProcuduct", source = "product.name")
     @Mapping(target = "descriptionProduct", source = "product.description")
@@ -17,7 +19,7 @@ public interface ProducteMapper {
     @Mapping(target = "unitsProduct", source = "product.units")
     @Mapping(target = "categoria", source = "product.categoria")
     @Mapping(target = "subcategory", source = "product.subcategory")
-    ProducteDTO ProductToProducteDTO(Product product);
+    ProductDTO ProductToProducteDTO(Product product);
 
     @Mapping(target = "name", source = "producteDTO.nameProcuduct")
     @Mapping(target = "description", source = "producteDTO.descriptionProduct")
@@ -26,5 +28,8 @@ public interface ProducteMapper {
     @Mapping(target = "units", source = "producteDTO.unitsProduct")
     @Mapping(target = "categoria", source = "producteDTO.categoria")
     @Mapping(target = "subcategory", source = "producteDTO.subcategory")
-    Product ProducteDTOToProduct(ProducteDTO producteDTO);
+    Product ProducteDTOToProduct(ProductDTO producteDTO);
+
+    Set<ProductDTO> ProductsToProductsDTO (Set<Product> products);
+    Set<Product> ProductsDTOToProducts (Set<ProductDTO> productsDTO);
 }

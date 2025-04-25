@@ -6,7 +6,7 @@ import com.example.botiga.Model.Subcategoria;
 import lombok.Data;
 
 @Data
-public class ProducteDTO {
+public class ProductDTO {
 
     private String nameProcuduct;
     private String descriptionProduct;

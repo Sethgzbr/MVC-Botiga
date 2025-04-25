@@ -13,7 +13,7 @@ import com.example.botiga.Repository.CategoriaRepository;
 
 @Service
 public class CategoriaServiceImpl implements BotigaService {
-
+    
     private final CategoriaRepository categoriaRepository;
     private final CategoriaMapper categoriaMapper;
     
@@ -23,36 +23,35 @@ public class CategoriaServiceImpl implements BotigaService {
         this.categoriaMapper = categoriaMapper;
     }
 
+    @Override
     public Set<CategoriaDTO> findAll(){
         Set<Categoria> categories = categoriaRepository.findAll();
-        return categoriaMapper.CategoriesDTOToCategories(categories);
+        return categoriaMapper.CategoriesToCategoriesDTO(categories);
     }
 
-    @Override
-    public CategoriaDTO findByName(String name){
-        Categoria categoria = categoriaRepository.findByName(name);
-        return categoriaMapper.CategoriaToCategoriaDTO(categoria);
-    }
 
-    @Override
     public void save(CategoriaDTO categoria){
         Categoria categoriaEntity = categoriaMapper.CategoriaDTOToCategoria(categoria);
         categoriaRepository.save(categoriaEntity);
     }
 
     @Override
-    Optional<Categoria> findById(Long id){
-
+    public Optional<CategoriaDTO> findById(Long id){
+        Optional<Categoria> categoria = categoriaRepository.findById(id);
+        return categoria.map(categoriaMapper::CategoriaToCategoriaDTO);
     }
-    void deleteById(Long id);
-    Optional<Categoria> findByCategoriaId(Long id);
+
+    @Override
+    public void deleteById(Long id){
+        categoriaRepository.deleteById(id);
+    }
 
     
     @Override
     public String findDescripcionById(Long id) {
         Categoria categoria = categoriaRepository.findById(id).orElse(null);
         if (categoria != null) {
-            return categoria.getdescCategoria();
+            return categoria.getDescCategoria();
         }
         return null;
     }

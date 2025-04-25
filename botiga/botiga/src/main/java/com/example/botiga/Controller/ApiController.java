@@ -1,6 +1,6 @@
 package com.example.botiga.Controller;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.botiga.DTO.CategoriaDTO;
-import com.example.botiga.DTO.ProducteDTO;
+import com.example.botiga.DTO.ProductDTO;
 import com.example.botiga.DTO.SubcategoriaDTO;
 import com.example.botiga.Service.CategoriaServiceImpl;
 import com.example.botiga.Service.ProductServiceImpl;
@@ -34,14 +34,14 @@ public class ApiController {
 
     // Nou Producte
     @PostMapping("/inserirProducte")
-    public ResponseEntity<String> inserirProducte(@RequestBody ProducteDTO productDTO) {
+    public ResponseEntity<String> inserirProducte(@RequestBody ProductDTO productDTO) {
         productService.save(productDTO);
         return ResponseEntity.ok("Producte inserit correctament.");
     }
 
     // Llistat tots els productes
     @GetMapping("/LlistarProductes")
-    public ResponseEntity<List<ProducteDTO>> llistarProductes() {
+    public ResponseEntity<Set<ProductDTO>> llistarProductes() {
         return ResponseEntity.ok(productService.findAll());
     }
 
@@ -54,9 +54,9 @@ public class ApiController {
     // Modificar el preu d’un producte
     @PutMapping("/ModificarPreu")
     public ResponseEntity<String> modificarPreu(@RequestParam Long id, @RequestParam double nouPreu) {
-        ProductDTO product = (ProducteDTO) productService.findById(id).orElse(null);
+        ProductDTO product = (ProductDTO) productService.findById(id).orElse(null);
         if (product != null) {
-            product.setpriceProduct(nouPreu);
+            product.setPriceProduct(nouPreu);
             productService.save(product);
             return ResponseEntity.ok("Preu modificat correctament.");
         }
@@ -85,7 +85,7 @@ public class ApiController {
 
     // Llistat totes les subcategories
     @GetMapping("/LlistarSubcategories")
-    public ResponseEntity<List<SubcategoriaDTO>> llistarSubcategories() {
+    public ResponseEntity<Set<SubcategoriaDTO>> llistarSubcategories() {
         return ResponseEntity.ok(subCategoriaService.findAll());
     }
 

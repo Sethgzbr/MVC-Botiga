@@ -1,28 +1,38 @@
 package com.example.botiga.Service;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.botiga.DTO.ProductDTO;
+import com.example.botiga.Mapper.ProductMapper;
 import com.example.botiga.Model.Product;
 import com.example.botiga.Repository.ProductRepository;
 
 @Service
 public class ProductServiceImpl implements BotigaService {
 
-    @Autowired
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
+    private final ProductMapper productMapper;
 
-    @Override
-    public List<Product> findAll() {
-        return productRepository.findAll();
+    @Autowired
+    public ProductServiceImpl(ProductRepository productRepository, ProductMapper productMapper) {
+        this.productRepository = productRepository;
+        this.productMapper = productMapper;
     }
 
     @Override
-    public Optional<Product> findById(Long id) {
-        return productRepository.findById(id);
+    public Set<ProductDTO> findAll() {
+        Set<Product> products = productRepository.findAll();
+        return productMapper.ProductsToProductsDTO(products);
+    }
+
+    @Override
+    public Optional<ProductDTO> findById(Long id) {
+        Optional<Product> product = productRepository.findById(id);
+        return product.map(productMapper::ProductToProducteDTO);
     }
 
     @Override
