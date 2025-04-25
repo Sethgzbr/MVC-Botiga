@@ -1,44 +1,51 @@
 package com.example.botiga.Service;
 
+import java.util.Optional;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.example.botiga.DTO.CategoriaDTO;
+import com.example.botiga.Mapper.CategoriaMapper;
 import com.example.botiga.Model.Categoria;
-import com.example.botiga.Model.Subcategoria;
 import com.example.botiga.Repository.CategoriaRepository;
-import java.util.List;
-import java.util.Optional;
 
 @Service
-public class CategoriaServiceImpl implements BotigaService {
+public class CategoriaServiceImpl {
 
+    private final CategoriaRepository categoriaRepository;
+    private final CategoriaMapper categoriaMapper;
+    
     @Autowired
-    private CategoriaRepository categoriaRepository;
+    public CategoriaServiceImpl(CategoriaRepository categoriaRepository, CategoriaMapper categoriaMapper) {
+        this.categoriaRepository = categoriaRepository;
+        this.categoriaMapper = categoriaMapper;
+    }
 
-    @Override
-    public List<Categoria> findAll() {
-        return categoriaRepository.findAll();
+    public Set<CategoriaDTO> findAll(){
+        Set<Categoria> categories = categoriaRepository.findAll();
+        return categoriaMapper.CategoriesDTOToCategories(categories);
     }
 
     @Override
-    public Optional<Categoria> findById(Long id) {
-        return categoriaRepository.findById(id);
+    public CategoriaDTO findByName(String name){
+        Categoria categoria = categoriaRepository.findByName(name);
+        return categoriaMapper.CategoriaToCategoriaDTO(categoria);
     }
 
     @Override
-    public void save(Object entity) {
-        if (!(entity instanceof Categoria)) {
-            throw new IllegalArgumentException("Entity must be a Categoria");
-        }
-        categoriaRepository.save((Categoria) entity);
+    public void save(CategoriaDTO categoria){
+        Categoria categoriaEntity = categoriaMapper.CategoriaDTOToCategoria(categoria);
+        categoriaRepository.save(categoriaEntity);
     }
 
     @Override
-    public void deleteById(Long id) {
-        categoriaRepository.deleteById(id);
-    }
+    Optional<Categoria> findById(Long id){
 
-    // Método adicional específico para categorías
-    public List<Categoria> findByCategoriaId(Long categoriaId) {
-        return CategoriaRepository.findByCategoria_Id_Categoria(categoriaId);
     }
+    void deleteById(Long id);
+    Optional<Categoria> findByCategoriaId(Long id);
+
+    
 }

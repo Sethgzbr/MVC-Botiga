@@ -1,5 +1,7 @@
 package com.example.botiga.Controller;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,14 +10,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.botiga.Model.Product;
-import com.example.botiga.Service.ProductService;
-import java.util.Set;
+import com.example.botiga.Service.ProductServiceImpl;
 
 @Controller
 public class WebController {
  
     @Autowired
-    private ProductService productService;
+    private ProductServiceImpl productService;
  
     @RequestMapping(value = "/")
     public String index(Model model) {
