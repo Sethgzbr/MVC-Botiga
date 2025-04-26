@@ -1,6 +1,6 @@
 package com.example.botiga.Mapper;
 
-import java.util.Set;
+import java.util.List;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -22,7 +22,7 @@ public interface CategoriaMapper {
     @Mapping(target = "subcategory", source = "categoriaDTO.subcategoria")
     Categoria CategoriaDTOToCategoria(CategoriaDTO categoriaDTO);
 
-    Set<CategoriaDTO> CategoriesToCategoriesDTO (Set<Categoria> categories);
-    Set<Categoria> CategoriesDTOToCategories (Set<CategoriaDTO> categoriesDTO);
+    List<CategoriaDTO> CategoriesToCategoriesDTO (List<Categoria> categories);
+    List<Categoria> CategoriesDTOToCategories (List<CategoriaDTO> categoriesDTO);
 
 }

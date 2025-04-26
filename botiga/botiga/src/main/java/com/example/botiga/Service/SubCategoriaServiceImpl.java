@@ -1,7 +1,7 @@
 package com.example.botiga.Service;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,8 +24,8 @@ public class SubCategoriaServiceImpl implements BotigaService {
     }
 
     @Override
-    public Set<SubcategoriaDTO> findAll() {
-        Set<Subcategoria> subcategorias = subcategoriaRepository.findAll();
+    public List<SubcategoriaDTO> findAll() {
+        List<Subcategoria> subcategorias = subcategoriaRepository.findAll();
         return subcategoriaMapper.SubcategoriesToSubcategoriesDTO(subcategorias);
     }
 

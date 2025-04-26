@@ -1,6 +1,6 @@
 package com.example.botiga.Controller;
 
-import java.util.Set;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -35,13 +35,17 @@ public class ApiController {
     // Nou Producte
     @PostMapping("/inserirProducte")
     public ResponseEntity<String> inserirProducte(@RequestBody ProductDTO productDTO) {
-        productService.save(productDTO);
+        try {
+            productService.save(productDTO);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error al inserir el producte: " + e.getMessage());
+        }
         return ResponseEntity.ok("Producte inserit correctament.");
     }
 
     // Llistat tots els productes
     @GetMapping("/LlistarProductes")
-    public ResponseEntity<Set<ProductDTO>> llistarProductes() {
+    public ResponseEntity<List<ProductDTO>> llistarProductes() {
         return ResponseEntity.ok(productService.findAll());
     }
 
@@ -85,7 +89,7 @@ public class ApiController {
 
     // Llistat totes les subcategories
     @GetMapping("/LlistarSubcategories")
-    public ResponseEntity<Set<SubcategoriaDTO>> llistarSubcategories() {
+    public ResponseEntity<List<SubcategoriaDTO>> llistarSubcategories() {
         return ResponseEntity.ok(subCategoriaService.findAll());
     }
 
@@ -119,5 +123,13 @@ public class ApiController {
         return ResponseEntity.badRequest().body("Subcategoria no trobada.");
     }
 
+    /*@GetMapping("/BuscaNom")
+    public ResponseEntity<Product> cercaNomProducte(@RequestParam String nom) {
+        Product producte = productService.findByName(nom);
+        if (producte != null) {
+            return ResponseEntity.ok(producte);
+        }
+        return ResponseEntity.badRequest().body(null);}
+    */
 }
 

@@ -1,9 +1,9 @@
 package com.example.botiga.Service;
 
-import java.util.Set;
+import java.util.List;
 
 public interface BotigaService {
-    Set<?> findAll();
+    List<?> findAll();
     Object findById(Long id);
     void save(Object entity);
     void deleteById(Long id);

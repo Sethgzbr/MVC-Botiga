@@ -1,7 +1,7 @@
 package com.example.botiga.Controller;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +29,7 @@ public class WebController {
  
     @RequestMapping(value = "/catalog")
     public String catalog(Model model) {
-        Set<ProductDTO> products = productService.findAll();
+        List<ProductDTO> products = productService.findAll();
         
         model.addAttribute("products", products);
         return "catalog";
@@ -39,7 +39,7 @@ public class WebController {
     public String inputCerca(Model model) {
 
         Product llibre = new Product();
-        llibre.setidProducte(0);
+        llibre.ListidProducte(0);
         model.addAttribute("llibreErr", true);
         model.addAttribute("message", "");
         model.addAttribute("llibre", llibre);

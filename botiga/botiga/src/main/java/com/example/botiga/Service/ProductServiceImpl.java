@@ -1,13 +1,15 @@
 package com.example.botiga.Service;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.botiga.DTO.ProductDTO;
+import com.example.botiga.Mapper.CategoriaMapper;
 import com.example.botiga.Mapper.ProductMapper;
+import com.example.botiga.Mapper.SubcategoriaMapper;
 import com.example.botiga.Model.Product;
 import com.example.botiga.Repository.ProductRepository;
 
@@ -16,16 +18,29 @@ public class ProductServiceImpl implements BotigaService {
 
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
+    private final CategoriaServiceImpl categoriaService;
+    private final SubCategoriaServiceImpl subCategoriaService;
+    private final CategoriaMapper categoriaMapper;
+    private final SubcategoriaMapper subcategoriaMapper;
 
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository, ProductMapper productMapper) {
+    public ProductServiceImpl(ProductRepository productRepository, 
+                               ProductMapper productMapper,
+                               CategoriaServiceImpl categoriaService,
+                               SubCategoriaServiceImpl subCategoriaService,
+                               CategoriaMapper categoriaMapper,
+                               SubcategoriaMapper subcategoriaMapper) {
         this.productRepository = productRepository;
         this.productMapper = productMapper;
+        this.categoriaService = categoriaService;
+        this.subCategoriaService = subCategoriaService;
+        this.categoriaMapper = categoriaMapper;
+        this.subcategoriaMapper = subcategoriaMapper;
     }
 
     @Override
-    public Set<ProductDTO> findAll() {
-        Set<Product> products = productRepository.findAll();
+    public List<ProductDTO> findAll() {
+        List<Product> products = productRepository.findAll();
         return productMapper.ProductsToProductsDTO(products);
     }
 
@@ -49,7 +64,7 @@ public class ProductServiceImpl implements BotigaService {
         productRepository.deleteById(id);
     }
 
-    public Object findByName(String name) {
+    public Product findByName(String name) {
         return productRepository.findByName(name);
     }
 

@@ -1,7 +1,7 @@
 package com.example.botiga.Service;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,8 +24,8 @@ public class CategoriaServiceImpl implements BotigaService {
     }
 
     @Override
-    public Set<CategoriaDTO> findAll(){
-        Set<Categoria> categories = categoriaRepository.findAll();
+    public List<CategoriaDTO> findAll(){
+        List<Categoria> categories = categoriaRepository.findAll();
         return categoriaMapper.CategoriesToCategoriesDTO(categories);
     }
 
