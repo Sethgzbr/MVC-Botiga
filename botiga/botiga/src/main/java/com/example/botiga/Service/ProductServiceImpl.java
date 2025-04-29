@@ -6,31 +6,57 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.botiga.DTO.ProductDTO;
+import com.example.botiga.Mapper.CategoriaMapper;
+import com.example.botiga.Mapper.ProductMapper;
+import com.example.botiga.Mapper.SubcategoriaMapper;
 import com.example.botiga.Model.Product;
 import com.example.botiga.Repository.ProductRepository;
 
 @Service
 public class ProductServiceImpl implements BotigaService {
 
-    @Autowired
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
+    private final ProductMapper productMapper;
+    private final CategoriaServiceImpl categoriaService;
+    private final SubCategoriaServiceImpl subCategoriaService;
+    private final CategoriaMapper categoriaMapper;
+    private final SubcategoriaMapper subcategoriaMapper;
 
-    @Override
-    public List<Product> findAll() {
-        return productRepository.findAll();
+    @Autowired
+    public ProductServiceImpl(ProductRepository productRepository, 
+                               ProductMapper productMapper,
+                               CategoriaServiceImpl categoriaService,
+                               SubCategoriaServiceImpl subCategoriaService,
+                               CategoriaMapper categoriaMapper,
+                               SubcategoriaMapper subcategoriaMapper) {
+        this.productRepository = productRepository;
+        this.productMapper = productMapper;
+        this.categoriaService = categoriaService;
+        this.subCategoriaService = subCategoriaService;
+        this.categoriaMapper = categoriaMapper;
+        this.subcategoriaMapper = subcategoriaMapper;
     }
 
     @Override
-    public Optional<Product> findById(Long id) {
-        return productRepository.findById(id);
+    public List<ProductDTO> findAll() {
+        List<Product> products = productRepository.findAll();
+        return productMapper.ProductsToProductsDTO(products);
+    }
+
+    @Override
+    public Optional<ProductDTO> findById(Long id) {
+        Optional<Product> product = productRepository.findById(id);
+        return product.map(productMapper::ProductToProducteDTO);
     }
 
     @Override
     public void save(Object entity) {
-        if (!(entity instanceof Product)) {
-            throw new IllegalArgumentException("Entity must be a Product");
+        if (!(entity instanceof ProductDTO)) {
+            throw new IllegalArgumentException("Entity must be a ProductDTO");
         }
-        productRepository.save((Product) entity);
+        Product product = productMapper.ProducteDTOToProduct((ProductDTO) entity);
+        productRepository.save(product);
     }
 
     @Override
@@ -38,7 +64,7 @@ public class ProductServiceImpl implements BotigaService {
         productRepository.deleteById(id);
     }
 
-    public Object findByName(String name) {
+    public Product findByName(String name) {
         return productRepository.findByName(name);
     }
 

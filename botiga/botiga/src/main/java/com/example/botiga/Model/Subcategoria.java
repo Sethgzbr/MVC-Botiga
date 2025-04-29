@@ -11,25 +11,34 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name = "subcategories")
+@Table(name = "Subcategoria")
 public class Subcategoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private long id_Subcategoria;
+
     @Column
     private String desc_Subcategoria;
+
     @Column
     private String status_Subcategoria;
-    @Column
-    @ManyToOne(cascade=CascadeType.PERSIST)
-    @JoinColumn(name="id_Categoria")
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_Categoria")
     private Categoria categoria;
+
     @Column
     private LocalDate creation_at;
+
     @Column
     private LocalDate updated_at;
-    
 }

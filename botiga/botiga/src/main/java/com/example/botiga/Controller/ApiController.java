@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.botiga.DTO.CategoriaDTO;
-import com.example.botiga.DTO.ProducteDTO;
+import com.example.botiga.DTO.ProductDTO;
 import com.example.botiga.DTO.SubcategoriaDTO;
 import com.example.botiga.Service.CategoriaServiceImpl;
 import com.example.botiga.Service.ProductServiceImpl;
@@ -34,14 +34,18 @@ public class ApiController {
 
     // Nou Producte
     @PostMapping("/inserirProducte")
-    public ResponseEntity<String> inserirProducte(@RequestBody ProducteDTO productDTO) {
-        productService.save(productDTO);
+    public ResponseEntity<String> inserirProducte(@RequestBody ProductDTO productDTO) {
+        try {
+            productService.save(productDTO);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error al inserir el producte: " + e.getMessage());
+        }
         return ResponseEntity.ok("Producte inserit correctament.");
     }
 
     // Llistat tots els productes
     @GetMapping("/LlistarProductes")
-    public ResponseEntity<List<ProducteDTO>> llistarProductes() {
+    public ResponseEntity<List<ProductDTO>> llistarProductes() {
         return ResponseEntity.ok(productService.findAll());
     }
 
@@ -54,9 +58,9 @@ public class ApiController {
     // Modificar el preu d’un producte
     @PutMapping("/ModificarPreu")
     public ResponseEntity<String> modificarPreu(@RequestParam Long id, @RequestParam double nouPreu) {
-        ProductDTO product = (ProducteDTO) productService.findById(id).orElse(null);
+        ProductDTO product = (ProductDTO) productService.findById(id).orElse(null);
         if (product != null) {
-            product.setpriceProduct(nouPreu);
+            product.setPriceProduct((float) nouPreu);
             productService.save(product);
             return ResponseEntity.ok("Preu modificat correctament.");
         }
@@ -119,5 +123,13 @@ public class ApiController {
         return ResponseEntity.badRequest().body("Subcategoria no trobada.");
     }
 
+    /*@GetMapping("/BuscaNom")
+    public ResponseEntity<Product> cercaNomProducte(@RequestParam String nom) {
+        Product producte = productService.findByName(nom);
+        if (producte != null) {
+            return ResponseEntity.ok(producte);
+        }
+        return ResponseEntity.badRequest().body(null);}
+    */
 }
 
