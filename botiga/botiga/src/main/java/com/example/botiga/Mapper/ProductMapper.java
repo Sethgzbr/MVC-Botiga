@@ -9,10 +9,10 @@ import org.mapstruct.ReportingPolicy;
 import com.example.botiga.DTO.ProductDTO;
 import com.example.botiga.Model.Product;
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(componentModel = "spring", uses = {CategoriaMapper.class, SubcategoriaMapper.class}, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ProductMapper {
 
-    @Mapping(target = "nameProcuduct", source = "product.name")
+    @Mapping(target = "nameProduct", source = "product.name")
     @Mapping(target = "descriptionProduct", source = "product.description")
     @Mapping(target = "companyProduct", source = "product.company")
     @Mapping(target = "priceProduct", source = "product.price")
@@ -21,7 +21,7 @@ public interface ProductMapper {
     @Mapping(target = "subcategory", source = "product.subcategory")
     ProductDTO ProductToProducteDTO(Product product);
 
-    @Mapping(target = "name", source = "producteDTO.nameProcuduct")
+    @Mapping(target = "name", source = "producteDTO.nameProduct")
     @Mapping(target = "description", source = "producteDTO.descriptionProduct")
     @Mapping(target = "company", source = "producteDTO.companyProduct")
     @Mapping(target = "price", source = "producteDTO.priceProduct")

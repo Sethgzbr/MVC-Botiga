@@ -8,11 +8,11 @@ import lombok.Data;
 @Data
 public class ProductDTO {
 
-    private String nameProcuduct;
+    private String nameProduct;
     private String descriptionProduct;
     private String companyProduct;
     private float priceProduct;
     private long unitsProduct;
-    private Categoria categoria;
-    private Subcategoria subcategory;
+    private CategoriaDTO categoria;
+    private SubcategoriaDTO subcategory;
 }
